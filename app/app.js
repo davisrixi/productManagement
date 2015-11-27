@@ -1,7 +1,8 @@
 /**
- * Created by Davis on 23/11/2015.
+ * Created by Davis on 8/20/2014.
  */
-(function(){
+(function () {
     "use strict";
-    var app = angular.module("productManagement",[]);
+    var app = angular.module("productManagement",
+                            ["common.services","productResourceMock"]);
 }());

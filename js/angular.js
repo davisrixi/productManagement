@@ -3438,8 +3438,8 @@ function annotate(fn) {
  * Service provider objects can have additional methods which allow configuration of the provider
  * and its service. Importantly, you can configure what kind of service is created by the `$get`
  * method, or how that service will act. For example, the {@link ng.$logProvider $logProvider} has a
- * method {@link ng.$logProvider#debugEnabled debugEnabled}
- * which lets you specify whether the {@link ng.$log $log} service will log debug messages to the
+ * method {@link ng.$logProvider#DavisugEnabled DavisugEnabled}
+ * which lets you specify whether the {@link ng.$log $log} service will log Davisug messages to the
  * console or not.
  *
  * @param {string} name The name of the instance. NOTE: the provider will be available under `name +
@@ -7792,7 +7792,7 @@ function $HttpProvider() {
      *   - **statusText** – `{string}` – HTTP status text of the response.
      *
      * @property {Array.<Object>} pendingRequests Array of config objects for currently pending
-     *   requests. This is primarily meant to be used for debugging purposes.
+     *   requests. This is primarily meant to be used for Davisugging purposes.
      *
      *
      * @example
@@ -9636,10 +9636,10 @@ function $LocationProvider(){
  * Simple service for logging. Default implementation safely writes the message
  * into the browser's console (if present).
  *
- * The main purpose of this service is to simplify debugging and troubleshooting.
+ * The main purpose of this service is to simplify Davisugging and troubleshooting.
  *
- * The default is to log `debug` messages. You can use
- * {@link ng.$logProvider ng.$logProvider#debugEnabled} to change this.
+ * The default is to log `Davisug` messages. You can use
+ * {@link ng.$logProvider ng.$logProvider#DavisugEnabled} to change this.
  *
  * @example
    <example>
@@ -9670,22 +9670,22 @@ function $LocationProvider(){
  * Use the `$logProvider` to configure how the application logs messages
  */
 function $LogProvider(){
-  var debug = true,
+  var Davisug = true,
       self = this;
 
   /**
    * @ngdoc property
-   * @name $logProvider#debugEnabled
+   * @name $logProvider#DavisugEnabled
    * @description
-   * @param {boolean=} flag enable or disable debug level messages
+   * @param {boolean=} flag enable or disable Davisug level messages
    * @returns {*} current value if used as getter or itself (chaining) if used as setter
    */
-  this.debugEnabled = function(flag) {
+  this.DavisugEnabled = function(flag) {
     if (isDefined(flag)) {
-      debug = flag;
+      Davisug = flag;
     return this;
     } else {
-      return debug;
+      return Davisug;
     }
   };
 
@@ -9729,16 +9729,16 @@ function $LogProvider(){
 
       /**
        * @ngdoc method
-       * @name $log#debug
+       * @name $log#Davisug
        *
        * @description
-       * Write a debug message
+       * Write a Davisug message
        */
-      debug: (function () {
-        var fn = consoleLog('debug');
+      Davisug: (function () {
+        var fn = consoleLog('Davisug');
 
         return function() {
-          if (debug) {
+          if (Davisug) {
             fn.apply(self, arguments);
           }
         };
@@ -11248,7 +11248,7 @@ function $QProvider() {
  *
  * @param {function(Function)} nextTick Function for executing functions in the next turn.
  * @param {function(...*)} exceptionHandler Function into which unexpected exceptions are passed for
- *     debugging purposes.
+ *     Davisugging purposes.
  * @returns {object} Promise manager.
  */
 function qFactory(nextTick, exceptionHandler) {
@@ -11761,7 +11761,7 @@ function $RootScopeProvider(){
      * @ngdoc property
      * @name $rootScope.Scope#$id
      * @returns {number} Unique scope ID (monotonically increasing alphanumeric sequence) useful for
-     *   debugging.
+     *   Davisugging.
      */
 
 
@@ -13266,7 +13266,7 @@ function $SceDelegateProvider() {
  * determine that something explicitly says it's safe to use a value for binding in that
  * context.  You can then audit your code (a simple grep would do) to ensure that this is only done
  * for those values that you can easily tell are safe - because they were received from your server,
- * sanitized by your library, etc.  You can organize your codebase to help with this - perhaps
+ * sanitized by your library, etc.  You can organize your coDavisase to help with this - perhaps
  * allowing only the files in a specific directory to do this.  Ensuring that the internal API
  * exposed by that code doesn't markup arbitrary values as safe then becomes a more manageable task.
  *
@@ -14985,7 +14985,7 @@ function dateFilter($locale) {
  * @description
  *   Allows you to convert a JavaScript object into JSON string.
  *
- *   This filter is mostly useful for debugging. When using the double curly {{value}} notation
+ *   This filter is mostly useful for Davisugging. When using the double curly {{value}} notation
  *   the binding is automatically converted to JSON.
  *
  * @param {*} object Any JavaScript object (including arrays and primitive types) to filter.
@@ -17502,13 +17502,13 @@ var ngModelDirective = function() {
  *       <input type="checkbox" ng-model="confirmed" ng-change="change()" id="ng-change-example1" />
  *       <input type="checkbox" ng-model="confirmed" id="ng-change-example2" />
  *       <label for="ng-change-example2">Confirmed</label><br />
- *       <tt>debug = {{confirmed}}</tt><br/>
+ *       <tt>Davisug = {{confirmed}}</tt><br/>
  *       <tt>counter = {{counter}}</tt><br/>
  *     </div>
  *   </file>
  *   <file name="protractor.js" type="protractor">
  *     var counter = element(by.binding('counter'));
- *     var debug = element(by.binding('confirmed'));
+ *     var Davisug = element(by.binding('confirmed'));
  *
  *     it('should evaluate the expression if changing from view', function() {
  *       expect(counter.getText()).toContain('0');
@@ -17516,14 +17516,14 @@ var ngModelDirective = function() {
  *       element(by.id('ng-change-example1')).click();
  *
  *       expect(counter.getText()).toContain('1');
- *       expect(debug.getText()).toContain('true');
+ *       expect(Davisug.getText()).toContain('true');
  *     });
  *
  *     it('should not evaluate the expression if changing from model', function() {
  *       element(by.id('ng-change-example2')).click();
 
  *       expect(counter.getText()).toContain('0');
- *       expect(debug.getText()).toContain('true');
+ *       expect(Davisug.getText()).toContain('true');
  *     });
  *   </file>
  * </example>
