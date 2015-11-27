@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Acme Product Management</title>
     <!--Library Script-->
+
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/app.css" rel="stylesheet"/>
+
     <script src="js/angular.js"></script>
     <!--Application Script-->
     <script src="app/app.js"></script>
@@ -12,35 +16,44 @@
 
 </head>
 <body ng-app="productManagement">
-<table ng-controller="ProductListCtrl as vm">
-    <thead>
-    <tr>
-        <td>
-            <button type="button" ng-click="vm.toggleImage()">{{vm.showImage ? "Hide":"Show"}}</button>
-        </td>
-        <td>Product</td>
-        <td>Code</td>
-        <td>Available</td>
-        <td>Price</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="product in vm.products">
-        <td>
-            <img ng-if="vm.showImage"
-                 ng-src="{{product.imageUrl}}"
-                 title="{{product.productName}}"
-                 style="width: 50px; margin: 2px">
-        </td>
-        <td>{{product.productName}}</td>
-        <td>{{product.productCode}}</td>
-        <td>{{product.releaseDate}}</td>
-        <td>{{product.price | currency}}</td>
+<div class="panel panel-primary">
 
-    </tr>
+<div class="panel-heading" style="font-size:large"> Product List
+</div>
+<div class="panel-body">
+    <table class="table" ng-controller="ProductListCtrl as vm">
+        <thead>
+        <tr>
+            <td>
+                <button type="button" class="btn btn-primary" ng-click="vm.toggleImage()">{{vm.showImage ? "Hide":"Show"}}</button>
+            </td>
+            <td>Product</td>
+            <td>Code</td>
+            <td>Available</td>
+            <td>Price</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in vm.products">
+            <td>
+                <img ng-if="vm.showImage"
+                     ng-src="{{product.imageUrl}}"
+                     title="{{product.productName}}"
+                     style="width: 50px; margin: 2px">
+            </td>
+            <td>{{product.productName}}</td>
+            <td>{{product.productCode}}</td>
+            <td>{{product.releaseDate}}</td>
+            <td>{{product.price | currency}}</td>
 
-    </tbody>
+        </tr>
 
-</table>
+        </tbody>
+
+    </table>
+</div>
+</div>
+
+
 </body>
 </html>
